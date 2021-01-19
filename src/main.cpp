@@ -3,9 +3,9 @@
 
 using namespace sf;
 
-int main()
+int menu()
 {
-    int BLOCK = 1; //pixels
+        int BLOCK = 1; //pixels
 
         int width = 1308 * BLOCK;
         int height = 802 * BLOCK;
@@ -49,9 +49,123 @@ int main()
                             {
                             if (e.mouseButton.button == Mouse::Left) 
                                 {
-                                    return 0;
+                                    break;
                                 }
                     }
     }
 }
+}
+
+int main()
+{
+        int board[8][8]=
+        {{-1,-2,-3,-4,-5,-3,-2,-1},
+        {-6,-6,-6,-6,-6,-6,-6,-6},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {6,6,6,6,6,6,6,6},
+        {1,2,3,4,5,3,2,1}};
+        
+        int BLOCK= 87;
+
+        int width = 8 * BLOCK;
+        int height = 8 * BLOCK;
+
+         for (int j = 0; j < 8; j++)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                std::cout<<board[j][i];
+            }
+        }
+
+        RenderWindow window(VideoMode(width, height), "Chess");
+
+        Texture chessboard_o,bp,wp,bk,wk,bkn,wkn,bq,wq,bb,wb,br,wr;
+
+        chessboard_o.loadFromFile("chessboard 87x87.png");
+        bp.loadFromFile("BP.png");wp.loadFromFile("WP.png");
+        bk.loadFromFile("BK.png");wk.loadFromFile("WK.png");
+        bkn.loadFromFile("BKN.png");wkn.loadFromFile("WKN.png");
+        bq.loadFromFile("BQ.png");wq.loadFromFile("WQ.png");
+        bb.loadFromFile("BB.png");wb.loadFromFile("WB.png");
+        br.loadFromFile("BR.png");wr.loadFromFile("WR.png");
+
+        Sprite chessboard(chessboard_o);
+        Sprite bpawn(bp),wpawn(wp),bking(bk),wking(wk),bknight(bkn),wknight(wkn);
+        Sprite bqueen(bq),wqueen(wq),bbishop(bb),wbishop(wb),brook(br),wrook(wr);
+
+        chessboard.setTexture(chessboard_o);
+        bpawn.setTexture(bp);wpawn.setTexture(wp);
+        bking.setTexture(bk);wking.setTexture(wk);
+        bknight.setTexture(bkn);wknight.setTexture(wkn);
+        bqueen.setTexture(bq);wqueen.setTexture(wq);
+        bbishop.setTexture(bb);wbishop.setTexture(wb);
+        brook.setTexture(br);wrook.setTexture(wr);
+
+
+            while(window.isOpen())
+    {
+        
+        Event e;
+            while (window.pollEvent(e)) 
+                {
+                if (e.type == Event::Closed) 
+                    window.close();
+                }
+
+                          
+    window.clear();
+    window.draw(chessboard);
+    for (int j = 0; j < 8; j++)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                if(board[j][i]==-6){bpawn.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(bpawn);
+                }
+                if(board[j][i]==-4){bking.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(bking);
+                }
+                if(board[j][i]==-5){bqueen.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(bqueen);
+                }
+                if(board[j][i]==-1){brook.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(brook);
+                }
+                if(board[j][i]==-3){bbishop.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(bbishop);
+                }
+                if(board[j][i]==-2){bknight.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(bknight);
+                }
+
+
+
+                if(board[j][i]==6){wpawn.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(wpawn);
+                }
+                if(board[j][i]==4){wking.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(wking);
+                }
+                if(board[j][i]==5){wqueen.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(wqueen);
+                }
+                if(board[j][i]==1){wrook.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(wrook);
+                }
+                if(board[j][i]==3){wbishop.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(wbishop);
+                }
+                if(board[j][i]==2){wknight.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(wknight);
+                }
+            }
+            
+        }
+    window.display();
+    }
+    return 0;
 }
