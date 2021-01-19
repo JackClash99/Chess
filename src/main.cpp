@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-int menu()
+void menu()
 {
         int BLOCK = 1; //pixels
 
@@ -58,6 +58,8 @@ int menu()
 
 int main()
 {
+    menu;
+    
         int board[8][8]=
         {{-1,-2,-3,-4,-5,-3,-2,-1},
         {-6,-6,-6,-6,-6,-6,-6,-6},
