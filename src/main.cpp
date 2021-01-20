@@ -78,7 +78,7 @@ int main()
 
         RenderWindow window(VideoMode(width, height), "Chess");
 
-        Texture chessboard_o,bp,wp,bk,wk,bkn,wkn,bq,wq,bb,wb,br,wr;
+        Texture chessboard_o,bp,wp,bk,wk,bkn,wkn,bq,wq,bb,wb,br,wr,freespace_o;
 
         chessboard_o.loadFromFile("chessboard 87x87.png");
         bp.loadFromFile("BP.png");wp.loadFromFile("WP.png");
@@ -87,8 +87,9 @@ int main()
         bq.loadFromFile("BQ.png");wq.loadFromFile("WQ.png");
         bb.loadFromFile("BB.png");wb.loadFromFile("WB.png");
         br.loadFromFile("BR.png");wr.loadFromFile("WR.png");
+        freespace_o.loadFromFile("freespace.png");
 
-        Sprite chessboard(chessboard_o);
+        Sprite chessboard(chessboard_o),freespace(freespace_o);
         Sprite bpawn(bp),wpawn(wp),bking(bk),wking(wk),bknight(bkn),wknight(wkn);
         Sprite bqueen(bq),wqueen(wq),bbishop(bb),wbishop(wb),brook(br),wrook(wr);
 
@@ -99,32 +100,66 @@ int main()
         bqueen.setTexture(bq);wqueen.setTexture(wq);
         bbishop.setTexture(bb);wbishop.setTexture(wb);
         brook.setTexture(br);wrook.setTexture(wr);
+        freespace.setTexture(freespace_o);
+         
+        for (int j = 0; j < 8; j++)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                std::cout<<board[j][i];
+            }
+        }
 
+bool secondclick=true;
+int input=0; 
 
     while(window.isOpen())
     {
-        int input[8][8];    
+          bool click=false;
 
-        Vector2i post = Mouse::getPosition(window);
-            int a = post.x/BLOCK;
-            int b = post.y/BLOCK;
-        
-        Vector2i posf = Mouse::getPosition(window);
-            int x = posf.x/BLOCK;
-            int y = posf.y/BLOCK;
+            Vector2i posf = Mouse::getPosition(window);
+
 
         Event e;
             while (window.pollEvent(e)) 
                 {
                 if (e.type == Event::Closed) 
                     window.close();
+
+                    if (e.type == Event::MouseButtonPressed)
+       {
+           if (e.mouseButton.button == Mouse::Left)
+               {
+                   click=true;
+               }
+       }
                 }
-            
-       
-                          
+
+            if(click){
+           if(secondclick==true)
+                   {
+                    secondclick=false;
+                    int x = posf.x/BLOCK;
+                    int y = posf.y/BLOCK;
+                    std::cout<<"0";
+                    input=board[y][x];
+                    board[y][x]=0;
+                   }
+
+                   else
+                   {
+                    secondclick=true;
+                    std::cout<<"1";
+                    int a = posf.x/BLOCK;
+                    int b = posf.y/BLOCK;
+                    board[b][a]=input;
+                   }
+                }
+
     window.clear();
     
     window.draw(chessboard);
+
 
     for (int j = 0; j < 8; j++)
         {
@@ -149,7 +184,9 @@ int main()
                 window.draw(bknight);
                 }
 
-
+                if(board[j][i]==0){freespace.setPosition(i*BLOCK, j*BLOCK);
+                window.draw(freespace);
+                }
 
                 if(board[j][i]==6){wpawn.setPosition(i*BLOCK, j*BLOCK);
                 window.draw(wpawn);
@@ -173,23 +210,9 @@ int main()
         }
                     
     window.display();
-        if (e.type == Event::MouseButtonPressed)
-       {
-           if (e.mouseButton.button == Mouse::Left)
-               {
-                   for (int j = 0; j < 8; j++)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                    input[i][j]=board[y][x];
-                    board[y][x]=0;
-                    board[b][a]=input[i][j];
-            }  
-            }
-                    
-                    
-               }
-       }
-    }
+
+        
+}
     return 0;
+    
 }
