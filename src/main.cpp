@@ -60,9 +60,6 @@ void menu()
 
 int main()
 {
-        //if click save sprite to
-
-        int input;
 
         int board[8][8]=
         {{-1,-2,-3,-4,-5,-3,-2,-1},
@@ -78,14 +75,6 @@ int main()
 
         int width = 8 * BLOCK;
         int height = 8 * BLOCK;
-
-         for (int j = 0; j < 8; j++)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                std::cout<<board[j][i];
-            }
-        }
 
         RenderWindow window(VideoMode(width, height), "Chess");
 
@@ -114,13 +103,15 @@ int main()
 
     while(window.isOpen())
     {
+        int input[8][8];    
+
+        Vector2i post = Mouse::getPosition(window);
+            int a = post.x/BLOCK;
+            int b = post.y/BLOCK;
+        
         Vector2i posf = Mouse::getPosition(window);
             int x = posf.x/BLOCK;
             int y = posf.y/BLOCK;
-
-        Vector2i pos = Mouse::getPosition(window);
-            int c = pos.c/BLOCK;
-            int d = pos.d/BLOCK;
 
         Event e;
             while (window.pollEvent(e)) 
@@ -129,9 +120,12 @@ int main()
                     window.close();
                 }
             
+       
                           
     window.clear();
+    
     window.draw(chessboard);
+
     for (int j = 0; j < 8; j++)
         {
             for (int i = 0; i < 8; i++)
@@ -175,21 +169,27 @@ int main()
                 if(board[j][i]==2){wknight.setPosition(i*BLOCK, j*BLOCK);
                 window.draw(wknight);
                 }
-
             } 
         }
-
-        if (e.type == Event::MouseButtonPressed) 
-                    {
-                        if (e.mouseButton.button == Mouse::Left) 
-                        {
-                            input=board[y][x];
-                            board[y][x]=0;
-                            board[b][a]=input;
-                        }
-                    }
+                    
     window.display();
-
+        if (e.type == Event::MouseButtonPressed)
+       {
+           if (e.mouseButton.button == Mouse::Left)
+               {
+                   for (int j = 0; j < 8; j++)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                    input[i][j]=board[y][x];
+                    board[y][x]=0;
+                    board[b][a]=input[i][j];
+            }  
+            }
+                    
+                    
+               }
+       }
     }
     return 0;
 }
