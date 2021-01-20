@@ -115,7 +115,6 @@ int input=0;
 
     while(window.isOpen())
     {
-          bool click=false;
 
             Vector2i posf = Mouse::getPosition(window);
 
@@ -130,13 +129,7 @@ int input=0;
        {
            if (e.mouseButton.button == Mouse::Left)
                {
-                   click=true;
-               }
-       }
-                }
-
-            if(click){
-           if(secondclick==true)
+                   if(secondclick==true)
                    {
                     secondclick=false;
                     int x = posf.x/BLOCK;
@@ -154,7 +147,13 @@ int input=0;
                     int b = posf.y/BLOCK;
                     board[b][a]=input;
                    }
+               }
+       }
                 }
+
+           
+           
+                
 
     window.clear();
     
