@@ -43,6 +43,8 @@ void menu()
     window.draw(title);
     window.display();
 
+
+
     if (x>=584 and y>=450 and x<=721 and y<=584)
                     {
                         if (e.type == Event::MouseButtonPressed) 
@@ -58,8 +60,10 @@ void menu()
 
 int main()
 {
-    menu;
-    
+        //if click save sprite to
+
+        int input;
+
         int board[8][8]=
         {{-1,-2,-3,-4,-5,-3,-2,-1},
         {-6,-6,-6,-6,-6,-6,-6,-6},
@@ -108,16 +112,23 @@ int main()
         brook.setTexture(br);wrook.setTexture(wr);
 
 
-            while(window.isOpen())
+    while(window.isOpen())
     {
-        
+        Vector2i posf = Mouse::getPosition(window);
+            int x = posf.x/BLOCK;
+            int y = posf.y/BLOCK;
+
+        Vector2i pos = Mouse::getPosition(window);
+            int c = pos.c/BLOCK;
+            int d = pos.d/BLOCK;
+
         Event e;
             while (window.pollEvent(e)) 
                 {
                 if (e.type == Event::Closed) 
                     window.close();
                 }
-
+            
                           
     window.clear();
     window.draw(chessboard);
@@ -164,10 +175,21 @@ int main()
                 if(board[j][i]==2){wknight.setPosition(i*BLOCK, j*BLOCK);
                 window.draw(wknight);
                 }
-            }
-            
+
+            } 
         }
+
+        if (e.type == Event::MouseButtonPressed) 
+                    {
+                        if (e.mouseButton.button == Mouse::Left) 
+                        {
+                            input=board[y][x];
+                            board[y][x]=0;
+                            board[b][a]=input;
+                        }
+                    }
     window.display();
+
     }
     return 0;
 }
