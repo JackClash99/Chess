@@ -13,9 +13,9 @@ void menu()
     RenderWindow window(VideoMode(width, height), "Chess");
 
     Texture pozadie_o, play_o, title_o;
-    pozadie_o.loadFromFile("chessback.jpg");
-    play_o.loadFromFile("play_button.png");
-    title_o.loadFromFile("chesstitle.jpg");
+    pozadie_o.loadFromFile("../chessback.jpg");
+    play_o.loadFromFile("../play_button.png");
+    title_o.loadFromFile("../chesstitle.jpg");
 
     Sprite pozadie, title, play;
     pozadie.setTexture(pozadie_o);
@@ -80,14 +80,14 @@ int main()
 
         Texture chessboard_o,bp,wp,bk,wk,bkn,wkn,bq,wq,bb,wb,br,wr,freespace_o;
 
-        chessboard_o.loadFromFile("chessboard 87x87.png");
-        bp.loadFromFile("BP.png");wp.loadFromFile("WP.png");
-        bk.loadFromFile("BK.png");wk.loadFromFile("WK.png");
-        bkn.loadFromFile("BKN.png");wkn.loadFromFile("WKN.png");
-        bq.loadFromFile("BQ.png");wq.loadFromFile("WQ.png");
-        bb.loadFromFile("BB.png");wb.loadFromFile("WB.png");
-        br.loadFromFile("BR.png");wr.loadFromFile("WR.png");
-        freespace_o.loadFromFile("freespace.png");
+        chessboard_o.loadFromFile("../chessboard 87x87.png");
+        bp.loadFromFile("../BP.png");wp.loadFromFile("../WP.png");
+        bk.loadFromFile("../BK.png");wk.loadFromFile("../WK.png");
+        bkn.loadFromFile("../BKN.png");wkn.loadFromFile("../WKN.png");
+        bq.loadFromFile("../BQ.png");wq.loadFromFile("../WQ.png");
+        bb.loadFromFile("../BB.png");wb.loadFromFile("../WB.png");
+        br.loadFromFile("../BR.png");wr.loadFromFile("../WR.png");
+        freespace_o.loadFromFile("../freespace.png");
 
         Sprite chessboard(chessboard_o),freespace(freespace_o);
         Sprite bpawn(bp),wpawn(wp),bking(bk),wking(wk),bknight(bkn),wknight(wkn);
@@ -150,10 +150,7 @@ int input=0;
                }
        }
                 }
-
-           
-           
-                
+       
 
     window.clear();
     
