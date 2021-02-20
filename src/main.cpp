@@ -3,19 +3,19 @@
 
 using namespace sf;
 
-void menu()
+int main()
 {
-        int BLOCK = 1; //pixels
+    int mBLOCK = 1; //pixels
 
-        int width = 1308 * BLOCK;
-        int height = 802 * BLOCK;
+        int mwidth = 1308 * mBLOCK;
+        int mheight = 802 * mBLOCK;
 
-    RenderWindow window(VideoMode(width, height), "Chess");
+    RenderWindow mwindow(VideoMode(mwidth, mheight), "Chess");
 
     Texture pozadie_o, play_o, title_o;
-    pozadie_o.loadFromFile("../chessback.jpg");
-    play_o.loadFromFile("../play_button.png");
-    title_o.loadFromFile("../chesstitle.jpg");
+    pozadie_o.loadFromFile("chessback.jpg");
+    play_o.loadFromFile("play_button.png");
+    title_o.loadFromFile("chesstitle.jpg");
 
     Sprite pozadie, title, play;
     pozadie.setTexture(pozadie_o);
@@ -24,26 +24,24 @@ void menu()
     title.setTexture(title_o);
     title.setPosition(540, 100);
 
-    while(window.isOpen())
+    while(mwindow.isOpen())
     {
-        Vector2i posm = Mouse::getPosition(window);
+        Vector2i posm = Mouse::getPosition(mwindow);
             int x = posm.x;
             int y = posm.y;
         
         Event e;
-            while (window.pollEvent(e)) 
+            while (mwindow.pollEvent(e)) 
                 {
                 if (e.type == Event::Closed) 
-                    window.close();
+                    mwindow.close();
                 }
                           
-    window.clear();
-    window.draw(pozadie);
-    window.draw(play);
-    window.draw(title);
-    window.display();
-
-
+    mwindow.clear();
+    mwindow.draw(pozadie);
+    mwindow.draw(play);
+    mwindow.draw(title);
+    mwindow.display();
 
     if (x>=584 and y>=450 and x<=721 and y<=584)
                     {
@@ -51,15 +49,11 @@ void menu()
                             {
                             if (e.mouseButton.button == Mouse::Left) 
                                 {
-                                    break;
+                                    mwindow.close();
                                 }
                     }
     }
 }
-}
-
-int main()
-{
 
         int board[8][8]=
         {{-1,-2,-3,-4,-5,-3,-2,-1},
@@ -80,14 +74,14 @@ int main()
 
         Texture chessboard_o,bp,wp,bk,wk,bkn,wkn,bq,wq,bb,wb,br,wr,freespace_o;
 
-        chessboard_o.loadFromFile("../chessboard 87x87.png");
-        bp.loadFromFile("../BP.png");wp.loadFromFile("../WP.png");
-        bk.loadFromFile("../BK.png");wk.loadFromFile("../WK.png");
-        bkn.loadFromFile("../BKN.png");wkn.loadFromFile("../WKN.png");
-        bq.loadFromFile("../BQ.png");wq.loadFromFile("../WQ.png");
-        bb.loadFromFile("../BB.png");wb.loadFromFile("../WB.png");
-        br.loadFromFile("../BR.png");wr.loadFromFile("../WR.png");
-        freespace_o.loadFromFile("../freespace.png");
+        chessboard_o.loadFromFile("chessboard 87x87.png");
+        bp.loadFromFile("BP.png");wp.loadFromFile("WP.png");
+        bk.loadFromFile("BK.png");wk.loadFromFile("WK.png");
+        bkn.loadFromFile("BKN.png");wkn.loadFromFile("WKN.png");
+        bq.loadFromFile("BQ.png");wq.loadFromFile("WQ.png");
+        bb.loadFromFile("BB.png");wb.loadFromFile("WB.png");
+        br.loadFromFile("BR.png");wr.loadFromFile("WR.png");
+        freespace_o.loadFromFile("freespace.png");
 
         Sprite chessboard(chessboard_o),freespace(freespace_o);
         Sprite bpawn(bp),wpawn(wp),bking(bk),wking(wk),bknight(bkn),wknight(wkn);
@@ -115,9 +109,7 @@ int input=0;
 
     while(window.isOpen())
     {
-
             Vector2i posf = Mouse::getPosition(window);
-
 
         Event e;
             while (window.pollEvent(e)) 
@@ -150,12 +142,9 @@ int input=0;
                }
        }
                 }
-       
 
     window.clear();
-    
     window.draw(chessboard);
-
 
     for (int j = 0; j < 8; j++)
         {
@@ -206,9 +195,6 @@ int input=0;
         }
                     
     window.display();
-
-        
 }
     return 0;
-    
 }
